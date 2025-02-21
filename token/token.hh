@@ -19,6 +19,8 @@ enum class TOKEN {
   // KEYWORDS
   KEYWORDSTART,
   INT,
+  FLOAT,
+  DOUBLE,
   VOID,
   RETURN,
   IF,
@@ -37,6 +39,9 @@ enum class TOKEN {
   SIZEOF,
   STRUCT,
   GOTO,
+  CONST,
+  VOLATILE,
+  TYPEDEF,
   KEYWORDEND,
   // GRAMMAR TOKENS
   GRAMMARSTART,
@@ -104,14 +109,17 @@ class Token {
 private:
   TOKEN token;
   std::optional<std::string> value;
+  int line_number;
 
 public:
-  Token(TOKEN token, std::optional<std::string> value)
-      : token(token), value(value) {}
-  Token(TOKEN token) : token(token) {}
+  Token(TOKEN token, std::optional<std::string> value, int line_number_)
+      : token(token), value(value), line_number(line_number_) {}
+  Token(TOKEN token, int line_number_)
+      : token(token), line_number(line_number_) {}
 
   TOKEN get_token() { return token; }
   std::optional<std::string> get_value() { return value; }
+  int get_line_number() { return line_number; }
 };
 
 void print_token(TOKEN token);

@@ -22,7 +22,6 @@ function(set_basic_compile_options target)
   target_compile_options(${target} PRIVATE 
     -Wall
     -Wextra
-    -Werror
     -fno-strict-aliasing
     -fwrapv
     -fpie
@@ -39,6 +38,7 @@ add_subdirectory(scasm)
 add_subdirectory(lexer)
 add_subdirectory(parser)
 add_subdirectory(codegen)
+add_subdirectory(parser_bison)
 
 set(SOURCES ./driver/driver.cc)
 

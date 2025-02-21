@@ -18,133 +18,133 @@ void lexer::tokenize() {
   char ch;
   while (file.get(ch)) {
     if (ch == '(') {
-      tokens.emplace_back(token::TOKEN::OPEN_PARANTHESES);
+      tokens.emplace_back(token::TOKEN::OPEN_PARANTHESES, line_number);
       col_number++;
     } else if (ch == ')') {
-      tokens.emplace_back(token::TOKEN::CLOSE_PARANTHESES);
+      tokens.emplace_back(token::TOKEN::CLOSE_PARANTHESES, line_number);
       col_number++;
     } else if (ch == '{') {
-      tokens.emplace_back(token::TOKEN::OPEN_BRACE);
+      tokens.emplace_back(token::TOKEN::OPEN_BRACE, line_number);
       col_number++;
     } else if (ch == '}') {
-      tokens.emplace_back(token::TOKEN::CLOSE_BRACE);
+      tokens.emplace_back(token::TOKEN::CLOSE_BRACE, line_number);
       col_number++;
     } else if (ch == ';') {
-      tokens.emplace_back(token::TOKEN::SEMICOLON);
+      tokens.emplace_back(token::TOKEN::SEMICOLON, line_number);
       col_number++;
     } else if (ch == '[') {
-      tokens.emplace_back(token::TOKEN::OPEN_BRACKET);
+      tokens.emplace_back(token::TOKEN::OPEN_BRACKET, line_number);
     } else if (ch == ']') {
-      tokens.emplace_back(token::TOKEN::CLOSE_BRACKET);
+      tokens.emplace_back(token::TOKEN::CLOSE_BRACKET, line_number);
     } else if (ch == ':') {
-      tokens.emplace_back(token::TOKEN::COLON);
+      tokens.emplace_back(token::TOKEN::COLON, line_number);
       col_number++;
     } else if (ch == '?') {
-      tokens.emplace_back(token::TOKEN::QUESTION_MARK);
+      tokens.emplace_back(token::TOKEN::QUESTION_MARK, line_number);
       col_number++;
     } else if (ch == ',') {
-      tokens.emplace_back(token::TOKEN::COMMA);
+      tokens.emplace_back(token::TOKEN::COMMA, line_number);
       col_number++;
     } else if (ch == '~') {
-      tokens.emplace_back(token::TOKEN::TILDE);
+      tokens.emplace_back(token::TOKEN::TILDE, line_number);
       col_number++;
     } else if (ch == '+') {
       file.get(ch);
       if (ch == '+') {
-        tokens.emplace_back(token::TOKEN::INCREMENT_OPERATOR);
+        tokens.emplace_back(token::TOKEN::INCREMENT_OPERATOR, line_number);
         col_number++;
       } else if (ch == '=') {
-        tokens.emplace_back(token::TOKEN::COMPOUND_SUM);
+        tokens.emplace_back(token::TOKEN::COMPOUND_SUM, line_number);
         col_number++;
       } else {
         file.seekg(-1, std::ios::cur);
-        tokens.emplace_back(token::TOKEN::PLUS);
+        tokens.emplace_back(token::TOKEN::PLUS, line_number);
       }
       col_number++;
     } else if (ch == '*') {
       file.get(ch);
       if (ch == '=') {
-        tokens.emplace_back(token::TOKEN::COMPOUND_PRODUCT);
+        tokens.emplace_back(token::TOKEN::COMPOUND_PRODUCT, line_number);
         col_number++;
       } else {
         file.seekg(-1, std::ios::cur);
-        tokens.emplace_back(token::TOKEN::ASTERISK);
+        tokens.emplace_back(token::TOKEN::ASTERISK, line_number);
       }
       col_number++;
     } else if (ch == '/') {
       file.get(ch);
       if (ch == '=') {
-        tokens.emplace_back(token::TOKEN::COMPOUND_DIVISION);
+        tokens.emplace_back(token::TOKEN::COMPOUND_DIVISION, line_number);
         col_number++;
       } else {
         file.seekg(-1, std::ios::cur);
-        tokens.emplace_back(token::TOKEN::FORWARD_SLASH);
+        tokens.emplace_back(token::TOKEN::FORWARD_SLASH, line_number);
       }
       col_number++;
     } else if (ch == '%') {
       file.get(ch);
       if (ch == '=') {
-        tokens.emplace_back(token::TOKEN::COMPOUND_REMAINDER);
+        tokens.emplace_back(token::TOKEN::COMPOUND_REMAINDER, line_number);
         col_number++;
       } else {
         file.seekg(-1, std::ios::cur);
-        tokens.emplace_back(token::TOKEN::PERCENT_SIGN);
+        tokens.emplace_back(token::TOKEN::PERCENT_SIGN, line_number);
       }
       col_number++;
     } else if (ch == '&') {
       file.get(ch);
       if (ch == '=') {
-        tokens.emplace_back(token::TOKEN::COMPOUND_AND);
+        tokens.emplace_back(token::TOKEN::COMPOUND_AND, line_number);
         col_number += 2;
       } else if (ch == '&') {
-        tokens.emplace_back(token::TOKEN::LAND);
+        tokens.emplace_back(token::TOKEN::LAND, line_number);
         col_number += 2;
       } else {
         file.seekg(-1, std::ios::cur);
-        tokens.emplace_back(token::TOKEN::AAND);
+        tokens.emplace_back(token::TOKEN::AAND, line_number);
         col_number++;
       }
     } else if (ch == '|') {
       file.get(ch);
       if (ch == '=') {
-        tokens.emplace_back(token::TOKEN::COMPOUND_OR);
+        tokens.emplace_back(token::TOKEN::COMPOUND_OR, line_number);
         col_number += 2;
       } else if (ch == '|') {
-        tokens.emplace_back(token::TOKEN::LOR);
+        tokens.emplace_back(token::TOKEN::LOR, line_number);
         col_number += 2;
       } else {
         file.seekg(-1, std::ios::cur);
-        tokens.emplace_back(token::TOKEN::AOR);
+        tokens.emplace_back(token::TOKEN::AOR, line_number);
         col_number++;
       }
     } else if (ch == '^') {
       file.get(ch);
       if (ch == '=') {
-        tokens.emplace_back(token::TOKEN::COMPOUND_XOR);
+        tokens.emplace_back(token::TOKEN::COMPOUND_XOR, line_number);
         col_number++;
       } else {
         file.seekg(-1, std::ios::cur);
-        tokens.emplace_back(token::TOKEN::XOR);
+        tokens.emplace_back(token::TOKEN::XOR, line_number);
       }
       col_number++;
     } else if (ch == '!') {
       file.get(ch);
       if (ch == '=') {
-        tokens.emplace_back(token::TOKEN::NOTEQUAL);
+        tokens.emplace_back(token::TOKEN::NOTEQUAL, line_number);
         col_number += 2;
       } else {
         file.seekg(-1, std::ios::cur);
-        tokens.emplace_back(token::TOKEN::NOT);
+        tokens.emplace_back(token::TOKEN::NOT, line_number);
         col_number++;
       }
     } else if (ch == '=') {
       file.get(ch);
       if (ch == '=') {
-        tokens.emplace_back(token::TOKEN::EQUAL);
+        tokens.emplace_back(token::TOKEN::EQUAL, line_number);
         col_number += 2;
       } else {
         file.seekg(-1, std::ios::cur);
-        tokens.emplace_back(token::TOKEN::ASSIGNMENT);
+        tokens.emplace_back(token::TOKEN::ASSIGNMENT, line_number);
         col_number++;
       }
     } else if (ch == '>') {
@@ -152,19 +152,19 @@ void lexer::tokenize() {
       if (ch == '>') {
         file.get(ch);
         if (ch == '=') {
-          tokens.emplace_back(token::TOKEN::COMPOUND_RIGHTSHIFT);
+          tokens.emplace_back(token::TOKEN::COMPOUND_RIGHTSHIFT, line_number);
           col_number++;
         } else {
           file.seekg(-1, std::ios::cur);
-          tokens.emplace_back(token::TOKEN::RIGHT_SHIFT);
+          tokens.emplace_back(token::TOKEN::RIGHT_SHIFT, line_number);
         }
         col_number += 2;
       } else if (ch == '=') {
-        tokens.emplace_back(token::TOKEN::GREATERTHANEQUAL);
+        tokens.emplace_back(token::TOKEN::GREATERTHANEQUAL, line_number);
         col_number += 2;
       } else {
         file.seekg(-1, std::ios::cur);
-        tokens.emplace_back(token::TOKEN::GREATERTHAN);
+        tokens.emplace_back(token::TOKEN::GREATERTHAN, line_number);
         col_number++;
       }
     } else if (ch == '<') {
@@ -172,35 +172,35 @@ void lexer::tokenize() {
       if (ch == '<') {
         file.get(ch);
         if (ch == '=') {
-          tokens.emplace_back(token::TOKEN::COMPOUND_LEFTSHIFT);
+          tokens.emplace_back(token::TOKEN::COMPOUND_LEFTSHIFT, line_number);
           col_number++;
         } else {
           file.seekg(-1, std::ios::cur);
-          tokens.emplace_back(token::TOKEN::LEFT_SHIFT);
+          tokens.emplace_back(token::TOKEN::LEFT_SHIFT, line_number);
         }
         col_number += 2;
       } else if (ch == '=') {
-        tokens.emplace_back(token::TOKEN::LESSTHANEQUAL);
+        tokens.emplace_back(token::TOKEN::LESSTHANEQUAL, line_number);
         col_number += 2;
       } else {
         file.seekg(-1, std::ios::cur);
-        tokens.emplace_back(token::TOKEN::LESSTHAN);
+        tokens.emplace_back(token::TOKEN::LESSTHAN, line_number);
         col_number++;
       }
     } else if (ch == '-') {
       file.get(ch);
       if (ch == '=') {
-        tokens.emplace_back(token::TOKEN::COMPOUND_DIFFERENCE);
+        tokens.emplace_back(token::TOKEN::COMPOUND_DIFFERENCE, line_number);
         col_number += 2;
       } else if (ch == '-') {
-        tokens.emplace_back(token::TOKEN::DECREMENT_OPERATOR);
+        tokens.emplace_back(token::TOKEN::DECREMENT_OPERATOR, line_number);
         col_number += 2;
       } else if (ch == '>') {
-        tokens.emplace_back(token::TOKEN::ARROW_OPERATOR);
+        tokens.emplace_back(token::TOKEN::ARROW_OPERATOR, line_number);
         col_number += 2;
       } else {
         file.seekg(-1, std::ios::cur);
-        tokens.emplace_back(token::TOKEN::HYPHEN);
+        tokens.emplace_back(token::TOKEN::HYPHEN, line_number);
         col_number++;
       }
     } else if (ch == '\'') {
@@ -215,7 +215,7 @@ void lexer::tokenize() {
           tmp += token::char_to_esc(ch);
         } else {
           success = false;
-          tokens.emplace_back(token::TOKEN::UNKNOWN);
+          tokens.emplace_back(token::TOKEN::UNKNOWN, line_number);
           error_recovery.emplace_back(
               std::make_pair(ERROR_LOCATION + " " + RED + "error:" + RESET +
                                  " " + "unkown escape character " + tmp,
@@ -225,7 +225,7 @@ void lexer::tokenize() {
         tmp += ch;
       } else {
         success = false;
-        tokens.emplace_back(token::TOKEN::UNKNOWN);
+        tokens.emplace_back(token::TOKEN::UNKNOWN, line_number);
         error_recovery.emplace_back(
             std::make_pair(ERROR_LOCATION + " " + RED + "error:" + RESET + " " +
                                "unkwown character " + tmp,
@@ -235,13 +235,13 @@ void lexer::tokenize() {
       col_number++;
       if (ch != '\'' and success != false) {
         success = false;
-        tokens.emplace_back(token::TOKEN::UNKNOWN);
+        tokens.emplace_back(token::TOKEN::UNKNOWN, line_number);
         error_recovery.emplace_back(
             std::make_pair(ERROR_LOCATION + " " + RED + "error:" + RESET + " " +
                                "no end quote for character " + tmp,
                            "please add end quotes"));
       } else {
-        tokens.emplace_back(token::Token(token::TOKEN::CHAR, tmp));
+        tokens.emplace_back(token::Token(token::TOKEN::CHAR, tmp, line_number));
       }
       col_number++;
     } else if (ch == '\"') {
@@ -257,7 +257,7 @@ void lexer::tokenize() {
             literal += token::char_to_esc(ch);
           } else {
             success = false;
-            tokens.emplace_back(token::TOKEN::UNKNOWN);
+            tokens.emplace_back(token::TOKEN::UNKNOWN, line_number);
             error_recovery.emplace_back(std::make_pair(
                 ERROR_LOCATION + " " + RED + "error:" + RESET + " " +
                     "bad escape character in " + literal + ": " + ch,
@@ -267,7 +267,7 @@ void lexer::tokenize() {
           literal += ch;
         } else { // will this ever be called?
           success = false;
-          tokens.emplace_back(token::TOKEN::UNKNOWN);
+          tokens.emplace_back(token::TOKEN::UNKNOWN, line_number);
           error_recovery.emplace_back(std::make_pair(
               ERROR_LOCATION + " " + RED + "error:" + RESET + " " +
                   "unkwown character in " + literal + " : " + ch,
@@ -277,10 +277,11 @@ void lexer::tokenize() {
         col_number++;
       }
       if (ch == '\"') {
-        tokens.emplace_back(token::Token(token::TOKEN::CHAR_ARR, literal));
+        tokens.emplace_back(
+            token::Token(token::TOKEN::CHAR_ARR, literal, line_number));
       } else {
         success = false;
-        tokens.emplace_back(token::TOKEN::UNKNOWN);
+        tokens.emplace_back(token::TOKEN::UNKNOWN, line_number);
         error_recovery.emplace_back(
             std::make_pair(ERROR_LOCATION + " " + RED + "error:" + RESET + " " +
                                "string missing end quotes " + " \"" + literal,
@@ -306,46 +307,59 @@ void lexer::tokenize() {
       // cases when we have a struct and need to
       // access its members
       if (identifier == "int") {
-        tokens.emplace_back(token::TOKEN::INT);
+        tokens.emplace_back(token::TOKEN::INT, line_number);
+      } else if (identifier == "float") {
+        tokens.emplace_back(token::TOKEN::FLOAT, line_number);
+      } else if (identifier == "double") {
+        tokens.emplace_back(token::TOKEN::DOUBLE, line_number);
       } else if (identifier == "void") {
-        tokens.emplace_back(token::TOKEN::VOID);
+        tokens.emplace_back(token::TOKEN::VOID, line_number);
       } else if (identifier == "return") {
-        tokens.emplace_back(token::TOKEN::RETURN);
+        tokens.emplace_back(token::TOKEN::RETURN, line_number);
       } else if (identifier == "if") {
-        tokens.emplace_back(token::TOKEN::IF);
+        tokens.emplace_back(token::TOKEN::IF, line_number);
       } else if (identifier == "else") {
-        tokens.emplace_back(token::TOKEN::ELSE);
+        tokens.emplace_back(token::TOKEN::ELSE, line_number);
       } else if (identifier == "do") {
-        tokens.emplace_back(token::TOKEN::DO);
+        tokens.emplace_back(token::TOKEN::DO, line_number);
       } else if (identifier == "while") {
-        tokens.emplace_back(token::TOKEN::WHILE);
+        tokens.emplace_back(token::TOKEN::WHILE, line_number);
       } else if (identifier == "for") {
-        tokens.emplace_back(token::TOKEN::FOR);
+        tokens.emplace_back(token::TOKEN::FOR, line_number);
       } else if (identifier == "break") {
-        tokens.emplace_back(token::TOKEN::BREAK);
+        tokens.emplace_back(token::TOKEN::BREAK, line_number);
       } else if (identifier == "continue") {
-        tokens.emplace_back(token::TOKEN::CONTINUE);
+        tokens.emplace_back(token::TOKEN::CONTINUE, line_number);
       } else if (identifier == "static") {
-        tokens.emplace_back(token::TOKEN::STATIC);
+        tokens.emplace_back(token::TOKEN::STATIC, line_number);
       } else if (identifier == "extern") {
-        tokens.emplace_back(token::TOKEN::EXTERN);
+        tokens.emplace_back(token::TOKEN::EXTERN, line_number);
       } else if (identifier == "long") {
-        tokens.emplace_back(token::TOKEN::LONG);
+        tokens.emplace_back(token::TOKEN::LONG, line_number);
       } else if (identifier == "signed") {
-        tokens.emplace_back(token::TOKEN::SIGNED);
+        tokens.emplace_back(token::TOKEN::SIGNED, line_number);
       } else if (identifier == "unsigned") {
-        tokens.emplace_back(token::TOKEN::UNSIGNED);
+        tokens.emplace_back(token::TOKEN::UNSIGNED, line_number);
+      } else if (identifier == "char") {
+        tokens.emplace_back(token::TOKEN::CHAR, line_number);
       } else if (identifier == "sizeof") {
-        tokens.emplace_back(token::TOKEN::SIZEOF);
+        tokens.emplace_back(token::TOKEN::SIZEOF, line_number);
       } else if (identifier == "struct") {
-        tokens.emplace_back(token::TOKEN::STRUCT);
+        tokens.emplace_back(token::TOKEN::STRUCT, line_number);
       } else if (identifier == "goto") {
-        tokens.emplace_back(token::TOKEN::GOTO);
+        tokens.emplace_back(token::TOKEN::GOTO, line_number);
+      } else if (identifier == "const") {
+        tokens.emplace_back(token::TOKEN::CONST, line_number);
+      } else if (identifier == "volatile") {
+        tokens.emplace_back(token::TOKEN::VOLATILE, line_number);
+      } else if (identifier == "typedef") {
+        tokens.emplace_back(token::TOKEN::TYPEDEF, line_number);
       } else {
-        tokens.emplace_back(token::Token(token::TOKEN::IDENTIFIER, identifier));
+        tokens.emplace_back(
+            token::Token(token::TOKEN::IDENTIFIER, identifier, line_number));
       }
       if (ch == '.') {
-        tokens.emplace_back(token::TOKEN::DOT);
+        tokens.emplace_back(token::TOKEN::DOT, line_number);
         col_number++;
       } else {
         file.seekg(-1, std::ios::cur);
@@ -398,7 +412,7 @@ void lexer::tokenize() {
                   " follows e/E in a number> " + std::string(1, ch),
               "some digit/+/- must follow a number that has e/E"));
           success = false;
-          tokens.emplace_back(token::TOKEN::UNKNOWN);
+          tokens.emplace_back(token::TOKEN::UNKNOWN, line_number);
           file.seekg(-1, std::ios::cur);
           continue;
         }
@@ -419,11 +433,12 @@ void lexer::tokenize() {
                              "characters cannot follow a number"));
         }
         success = false;
-        tokens.emplace_back(token::TOKEN::UNKNOWN);
+        tokens.emplace_back(token::TOKEN::UNKNOWN, line_number);
         file.seekg(-1, std::ios::cur);
         continue;
       } else {
-        tokens.emplace_back(token::Token(token::TOKEN::CONSTANT, constant));
+        tokens.emplace_back(
+            token::Token(token::TOKEN::CONSTANT, constant, line_number));
       }
       file.seekg(-1, std::ios::cur);
       col_number += (constant.length());
@@ -440,7 +455,7 @@ void lexer::tokenize() {
                              " invalid token> " + std::string(1, ch),
                          "Please check the code"));
       success = false;
-      tokens.emplace_back(token::TOKEN::UNKNOWN);
+      tokens.emplace_back(token::TOKEN::UNKNOWN, line_number);
     }
   }
 }

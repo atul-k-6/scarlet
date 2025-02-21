@@ -25,6 +25,12 @@ void print_token(TOKEN token) {
   case TOKEN::INT:
     std::cerr << "int ";
     break;
+  case TOKEN::FLOAT:
+    std::cerr << "float ";
+    break;
+  case TOKEN::DOUBLE:
+    std::cerr << "double ";
+    break;
   case TOKEN::VOID:
     std::cerr << "void ";
     break;
@@ -78,6 +84,15 @@ void print_token(TOKEN token) {
     break;
   case TOKEN::GOTO:
     std::cerr << "goto ";
+    break;
+  case TOKEN::CONST:
+    std::cerr << "const ";
+    break;
+  case TOKEN::VOLATILE:
+    std::cerr << "volatile ";
+    break;
+  case TOKEN::TYPEDEF:
+    std::cerr << "typedef ";
     break;
   case TOKEN::OPEN_PARANTHESES:
     std::cerr << "( ";
@@ -247,6 +262,10 @@ std::string to_string(TOKEN token) {
     return "string";
   case TOKEN::INT:
     return "int";
+  case TOKEN::FLOAT:
+    return "float";
+  case TOKEN::DOUBLE:
+    return "double";
   case TOKEN::VOID:
     return "void";
   case TOKEN::RETURN:
@@ -283,6 +302,12 @@ std::string to_string(TOKEN token) {
     return "struct";
   case TOKEN::GOTO:
     return "goto";
+  case TOKEN::CONST:
+    return "const";
+  case TOKEN::VOLATILE:
+    return "volatile";
+  case TOKEN::TYPEDEF:
+    return "typedef";
   case TOKEN::OPEN_PARANTHESES:
     return "(";
   case TOKEN::CLOSE_PARANTHESES:
